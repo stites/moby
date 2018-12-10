@@ -5,6 +5,8 @@ license:             BSD3
 author:              "Sam Stites"
 maintainer:          "fnz@fgvgrf.vb (cipher:rot13)"
 copyright:           "Copyright: (c) 2018 Sam Stites"
+data-dir:            "data/"
+build-type:          "Custom"
 
 extra-source-files:
 - README.md
@@ -46,3 +48,20 @@ tests:
     - -with-rtsopts=-N
     dependencies:
     - moby
+
+custom-setup:
+  dependencies:
+    - Cabal
+    - http-client
+    - http-client-tls
+    - http-types
+    - safe-exceptions
+    - extra
+    - base >= 4.7 && < 5
+    - bytestring
+    - cryptonite
+    - directory
+    - filepath
+    - network-uri
+    - hashmap
+

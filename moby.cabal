@@ -1,10 +1,10 @@
-cabal-version: 1.12
+cabal-version: 1.24
 
 -- This file has been generated from package.yaml by hpack version 0.31.1.
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 496a2325892452afb15f66baa9569c92060553afa97bc3b2e22f0e8c12fdf898
+-- hash: 174fd78558ab84b163afeb10de587b35503a6d37c782c65dd78bee9869530e85
 
 name:           moby
 version:        0.1.0.0
@@ -16,14 +16,31 @@ maintainer:     fnz@fgvgrf.vb (cipher:rot13)
 copyright:      Copyright: (c) 2018 Sam Stites
 license:        BSD3
 license-file:   LICENSE
-build-type:     Simple
+build-type:     Custom
 extra-source-files:
     README.md
     ChangeLog.md
+data-dir:       data/
 
 source-repository head
   type: git
   location: https://github.com/stites/moby
+
+custom-setup
+  setup-depends:
+      Cabal
+    , base >=4.7 && <5
+    , bytestring
+    , cryptonite
+    , directory
+    , extra
+    , filepath
+    , hashmap
+    , http-client
+    , http-client-tls
+    , http-types
+    , network-uri
+    , safe-exceptions
 
 library
   exposed-modules:
