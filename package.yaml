@@ -44,7 +44,7 @@ library:
     - comonad
 
 executables:
-  moby-exe:
+  moby:
     main:                Main.hs
     source-dirs:         exe
     ghc-options:

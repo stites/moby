@@ -4,7 +4,7 @@ cabal-version: 1.24
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: c43f8d4998a753b1fa5bb21aece77dd0fdad0dc3a579dc98e9adc371cd0f157e
+-- hash: 33c063ee953abcf50090002651b152753c99b168fe70852d40ce19a5cedded44
 
 name:           moby
 version:        0.1.0.0
@@ -71,7 +71,7 @@ library
     , zlib
   default-language: Haskell2010
 
-executable moby-exe
+executable moby
   main-is: Main.hs
   other-modules:
       Paths_moby
