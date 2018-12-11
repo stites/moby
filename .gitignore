@@ -1,4 +1,4 @@
-data/words.txt
+data/words.txt*
 
 # Created by https://www.gitignore.io/api/haskell
 # Edit at https://www.gitignore.io/?templates=haskell

@@ -4,7 +4,7 @@ cabal-version: 1.24
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 174fd78558ab84b163afeb10de587b35503a6d37c782c65dd78bee9869530e85
+-- hash: 8cc68fd3f1b8a67126f64f1ab42d8b579e1657191fdd4d119da59224c642490c
 
 name:           moby
 version:        0.1.0.0
@@ -39,18 +39,30 @@ custom-setup
     , http-client
     , http-client-tls
     , http-types
-    , network-uri
     , safe-exceptions
+    , zlib
 
 library
   exposed-modules:
+      Configure
       Lib
+      Version
   other-modules:
       Paths_moby
   hs-source-dirs:
       src
   build-depends:
       base >=4.7 && <5
+    , bytestring
+    , cryptonite
+    , dhall
+    , directory
+    , filepath
+    , http-client
+    , http-client-tls
+    , http-types
+    , network-uri
+    , zlib
   default-language: Haskell2010
 
 executable moby-exe
@@ -58,7 +70,7 @@ executable moby-exe
   other-modules:
       Paths_moby
   hs-source-dirs:
-      app
+      exe
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:
       base >=4.7 && <5

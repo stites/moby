@@ -26,11 +26,22 @@ dependencies:
 
 library:
   source-dirs: src
+  dependencies:
+    - dhall
+    - network-uri
+    - directory
+    - filepath
+    - cryptonite
+    - http-client
+    - http-client-tls
+    - http-types
+    - bytestring
+    - zlib
 
 executables:
   moby-exe:
     main:                Main.hs
-    source-dirs:         app
+    source-dirs:         exe
     ghc-options:
     - -threaded
     - -rtsopts
@@ -62,6 +73,6 @@ custom-setup:
     - cryptonite
     - directory
     - filepath
-    - network-uri
     - hashmap
+    - zlib
 

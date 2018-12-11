@@ -1,0 +1,5 @@
+--restart=./package.yaml
+--restart=./stack.yaml
+--restart=./.ghcid
+--reload=./src/Lib.hs
+-T Main.main
