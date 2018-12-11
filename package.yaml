@@ -39,6 +39,9 @@ library:
     - zlib
     - fgl
     - text
+    - unordered-containers
+    - hashtables
+    - comonad
 
 executables:
   moby-exe:
@@ -50,6 +53,8 @@ executables:
     - -with-rtsopts=-N
     dependencies:
     - moby
+    - optparse-applicative
+    - bytestring
 
 tests:
   moby-test:

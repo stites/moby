@@ -19,6 +19,17 @@ someFunc = do
   solveShortest (ns, ess) 1 6
   solveMST (ns, ess)
 
+data Tool = Hammer | PowerSaw | Ladder | CaulkingGun
+  deriving (Eq, Ord, Show)
+
+data People = Jason | Amanda | Kristina | Chad | Josephine | Chris | Dennis
+  deriving (Eq, Ord, Show)
+
+tools = [Hammer, Hammer, PowerSaw, Ladder, Ladder, Ladder, CaulkingGun]
+
+-- ========================================================================= --
+-- ========================================================================= --
+
 ns = 6
 ess =
   [ EdgeSpec {fromNode = 1, toNode = 2, distance = 3}

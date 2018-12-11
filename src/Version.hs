@@ -15,3 +15,5 @@ instance Show Version where
 versionBranch :: Version -> [Int]
 versionBranch = V.versionBranch . unsafeCoerce
 
+version :: Version
+version = Version Paths_moby.version
