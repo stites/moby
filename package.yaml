@@ -37,6 +37,8 @@ library:
     - http-types
     - bytestring
     - zlib
+    - fgl
+    - text
 
 executables:
   moby-exe:
