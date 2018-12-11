@@ -45,8 +45,8 @@ library:
 
 executables:
   moby:
-    main:                Main.hs
-    source-dirs:         exe
+    main: Main.hs
+    source-dirs: client
     ghc-options:
     - -threaded
     - -rtsopts
@@ -55,6 +55,20 @@ executables:
     - moby
     - optparse-applicative
     - bytestring
+      # - network
+
+  mobyd:
+    main: Main.hs
+    source-dirs: server
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - moby
+    - optparse-applicative
+    - bytestring
+      #- network
 
 tests:
   moby-test:
