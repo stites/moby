@@ -4,7 +4,7 @@ cabal-version: 1.24
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: a703220be1709478119bcb732d5203ef03cf807a5dae1426982e074e92485943
+-- hash: 73c1cbecdb1381b42f0124db7770e043fedf09955066f9b45cb56e85904a6f1c
 
 name:           moby
 version:        0.1.0.0
@@ -99,16 +99,31 @@ executable moby
 executable mobyd
   main-is: Main.hs
   other-modules:
+      Download
       Paths_moby
   hs-source-dirs:
       server
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:
-      base >=4.7 && <5
+      Cabal
+    , base >=4.7 && <5
     , bytestring
+    , cryptonite
+    , directory
+    , extra
+    , filepath
+    , http-client
+    , http-client-tls
+    , http-types
     , moby
     , network
     , optparse-applicative
+    , path
+    , safe-exceptions
+    , unordered-containers
+    , wai
+    , warp
+    , zlib
   default-language: Haskell2010
 
 test-suite moby-test

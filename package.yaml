@@ -77,6 +77,24 @@ executables:
     - optparse-applicative
     - bytestring
     - network
+    - Cabal
+    - unordered-containers
+    - Cabal
+    - http-client
+    - http-client-tls
+    - http-types
+    - safe-exceptions
+    - extra
+    - base >= 4.7 && < 5
+    - bytestring
+    - cryptonite
+    - directory
+    - unordered-containers
+    - filepath
+    - zlib
+    - path
+    - warp
+    - wai
 
 tests:
   moby-test:

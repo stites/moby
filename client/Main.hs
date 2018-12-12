@@ -17,7 +17,7 @@ main = execParser opts >>= \mos ->
     (True,  _) -> print V.version
     (   _, ws) ->
       let w = C.unwords ws
-      in (`lookupWord` w) <$> loadMobyTxt
+      in (`lookupWord` w) <$> loadMobyTxt "words.txt"
         >>= \case
           Nothing -> printf "%s not found in moby!\n" (show w)
           Just s  -> do

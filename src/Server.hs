@@ -1,5 +1,6 @@
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DeriveAnyClass #-}
 {-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE TypeOperators #-}
@@ -46,15 +47,15 @@ type Healthcheck
   = "health" :> Verb 'GET 202 '[JSON] NoContent
 
 
-newtype LookupReqBody = LookupReqBody
+data LookupReqBody = LookupReqBody
   { word :: Text
   } deriving stock (Generic)
-    deriving newtype (FromJSON, ToJSON)
+    deriving anyclass (FromJSON, ToJSON)
 
-newtype Synonyms = Synonyms
+data Synonyms = Synonyms
   { synonyms :: Text
   } deriving stock (Generic)
-    deriving newtype (FromJSON, ToJSON)
+    deriving anyclass (FromJSON, ToJSON)
 
 -- ------------------------------------------------------------------------- --
 
