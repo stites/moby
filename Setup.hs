@@ -4,7 +4,7 @@ module Main where
 import Control.Exception.Safe (throwString)
 import Control.Monad (unless, when, join)
 import Control.Monad.Extra (unlessM)
-import Data.HashSet (Set)
+import Data.HashSet (HashSet)
 import Data.List (intercalate)
 import Data.Maybe (isJust)
 import Distribution.PackageDescription
@@ -42,8 +42,8 @@ fetchFiles :: GenericPackageDescription -> IO ()
 fetchFiles g = mapM_ (maybeDownload g) fileInfos
 
 
-getFilePath :: GenericPackageDescription -> FilePath -> FilePath
-getFilePath g basename = dataDir (packageDescription g) ++ basename
+getFilePath :: GenericPackageDescription -> FilePath -> Bool -> FilePath
+getFilePath g basename isgz = dataDir (packageDescription g) ++ basename ++ (if isgz then ".gz" else "")
 
 
 getUrl :: FilePath -> String
@@ -58,7 +58,7 @@ maybeDownload :: GenericPackageDescription -> (String, Bool, String) -> IO ()
 maybeDownload g (basename, yesGZip, sha256) = doDownload >> verify yesGZip g basename sha256
  where
   doDownload :: IO ()
-  doDownload = unlessM (doesFileExist $ getFilePath g basename) $ do
+  doDownload = unlessM (doesFileExist $ getFilePath g basename yesGZip) $ do
     printf "Downloading %s...\n" basename
     hFlush stdout
     download yesGZip g basename
@@ -71,7 +71,7 @@ download yesGZip g basename = do
     200  -> B.writeFile outFile ((if yesGZip then GZip.compress else id) $ responseBody rsp)
     code -> throwString ( "[RESP_CODE:"++show code++"] Failed to get " ++ basename ++ "\n" ++ manualDownloadMsg g basename)
   where
-    outFile = getFilePath g basename ++ (if yesGZip then ".gz" else "")
+    outFile = getFilePath g basename yesGZip
     url = getUrl basename
 
 
@@ -119,9 +119,9 @@ manualDownloadMsg g basename = mainmsg ++ extramsg ++ "\n"
     "\n=> Other files to consider downloading:\n"
     ++ unlines (("   - " ++) . getUrl <$> HS.toList otherFiles)
 
-  allFiles :: Set String
+  allFiles :: HashSet String
   allFiles = HS.fromList (fmap (\(x, _, _) -> x) fileInfos)
 
-  otherFiles :: Set String
+  otherFiles :: HashSet String
   otherFiles = HS.filter (/= basename) allFiles
 

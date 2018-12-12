@@ -4,7 +4,7 @@ cabal-version: 1.24
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 505afbb4d92f16cdd0535b89dbe2d453753069eabd0362b838acbcb6f43e51f3
+-- hash: 10dc3c5fa558b2ad7b97c46ff89ed7b5027a3b0972e1e9ac0adb7f8d4d043e00
 
 name:           moby
 version:        0.1.0.0
@@ -20,6 +20,8 @@ build-type:     Custom
 extra-source-files:
     README.md
     ChangeLog.md
+data-files:
+    words.txt.gz
 data-dir:       data/
 
 source-repository head
@@ -35,11 +37,11 @@ custom-setup
     , directory
     , extra
     , filepath
-    , hashmap
     , http-client
     , http-client-tls
     , http-types
     , safe-exceptions
+    , unordered-containers
     , zlib
 
 library

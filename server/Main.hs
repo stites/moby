@@ -1,4 +1,3 @@
-{-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 module Main where
 
@@ -13,45 +12,38 @@ import qualified Version as V
 
 main :: IO ()
 main = execParser opts >>= \mos ->
-  case (version mos, word mos) of
-    (True,  _) -> print V.version
-    (   _, ws) ->
-      let w = C.unwords ws
-      in (`lookupWord` w) <$> loadMobyTxt
-        >>= \case
-          Nothing -> printf "%s not found in moby!\n" (show w)
-          Just s  -> do
-            let hdr = show w ++ " synonyms:"
-            putStrLn   hdr
-            putStrLn $ replicate (length hdr) '='
-            putStrLn . C.unpack $ C.intercalate (sep mos) (C.split ',' s)
+  if version mos
+  then print V.version
+  else do
+    undefined
+    -- add a pid file (if a pid and lock exist, error)
+    -- check to see if there is a lock file (if so warn and overwrite lock file)
+    -- add a lock file
+    -- look up words.txt file
+    -- start socket
+    -- wait for queued messages
+    -- return results on queued messages
+    -- on exit:
+    --   - remove lock
+    --   - remove pid
+    --   - exit 0
+
  where
    opts = info (mobyOpts <**> helper)
       ( fullDesc
-      <> progDesc "look up synonyms for WORD"
-      <> header "moby -- look up words from the Moby Project"
+      <> progDesc "Start server to query moby thesaurus"
+      <> header "mobyd -- backend to the moby cli"
       )
 
-data MobyOpts = MobyOpts
-  { sep :: ByteString
-  , version :: Bool
-  , word :: [ByteString]
+newtype MobyOpts = MobyOpts
+  { version :: Bool
   }
 
 mobyOpts :: Parser MobyOpts
 mobyOpts = MobyOpts
-  <$> strOption
-      ( long "sep"
-      <> short 's'
-      <> value "\n"
-      <> metavar "SEPERATOR"
-      <> help "seperator for words"
-      <> showDefault
-      )
-  <*> switch
+  <$> switch
       ( long "version"
       <> short 'v'
       <> help "Show the version"
       )
-  <*> some (argument str (metavar "WORD"))
 

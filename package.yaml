@@ -6,6 +6,7 @@ author:              "Sam Stites"
 maintainer:          "fnz@fgvgrf.vb (cipher:rot13)"
 copyright:           "Copyright: (c) 2018 Sam Stites"
 data-dir:            "data/"
+data-files:          "*.gz"
 build-type:          "Custom"
 
 extra-source-files:
@@ -55,7 +56,7 @@ executables:
     - moby
     - optparse-applicative
     - bytestring
-      # - network
+    - network
 
   mobyd:
     main: Main.hs
@@ -68,7 +69,7 @@ executables:
     - moby
     - optparse-applicative
     - bytestring
-      #- network
+    - network
 
 tests:
   moby-test:
@@ -93,7 +94,7 @@ custom-setup:
     - bytestring
     - cryptonite
     - directory
+    - unordered-containers
     - filepath
-    - hashmap
     - zlib
 

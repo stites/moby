@@ -26,8 +26,11 @@ lookupMoby w = (`lookupWord` w) <$> loadMobyTxt
 lookupWord :: ByteString -> ByteString -> Maybe ByteString
 lookupWord ws v = runST $ (`H.lookup` v) =<< mkMobyTable ws
 
+getWordsTxt :: IO FilePath
+getWordsTxt = (++ "words.txt.gz") <$> Paths_moby.getDataDir
+
 loadMobyTxt :: IO ByteString
-loadMobyTxt = C.filter (/= '\r') . GZip.decompress <$> BL.readFile "data/words.txt.gz"
+loadMobyTxt = getWordsTxt >>= fmap (C.filter (/= '\r') . GZip.decompress) . BL.readFile
 
 mobyKVs :: ByteString -> [(ByteString, ByteString)]
 mobyKVs = fmap (second (BL.drop 1) . C.span (/= ',')) . C.lines
