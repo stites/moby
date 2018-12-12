@@ -25,22 +25,25 @@ import qualified Configure as Moby
 -- lookupMoby :: FilePath -> ByteString -> IO (Maybe ByteString)
 -- lookupMoby fp w = (`lookupWord` w) <$> loadMobyTxt fp
 
-lookupWord :: ByteString -> ByteString -> Maybe ByteString
+lookupWord :: ByteString -> Text -> Maybe Text
 lookupWord ws v = runST $ (`H.lookup` v) =<< mkMobyTable ws
 
 -------------------------------------------------------------------------------
 
-mkMobyTable :: ByteString -> ST s (HC.HashTable s ByteString ByteString)
+mkMobyTable :: ByteString -> ST s (HC.HashTable s Text Text)
 mkMobyTable = H.fromList . mobyKVs
 
-mkMobyMap :: ByteString -> HashMap ByteString ByteString
+mkMobyMap :: ByteString -> HashMap Text Text
 mkMobyMap = HM.fromList . mobyKVs
 
 mkMobyMap' :: ByteString -> HashMap Text Text
-mkMobyMap' = HM.fromList . fmap (T.pack . C.unpack *** T.pack . C.unpack) . mobyKVs
+mkMobyMap' = HM.fromList . mobyKVs
 
-mobyKVs :: ByteString -> [(ByteString, ByteString)]
-mobyKVs = fmap (second (BL.drop 1) . C.span (/= ',')) . C.lines
+mobyKVs :: ByteString -> [(Text, Text)]
+mobyKVs
+  = fmap (T.pack . C.unpack *** T.pack . C.unpack)
+  . fmap (second (BL.drop 1) . C.span (/= ','))
+  . C.lines
 
 -------------------------------------------------------------------------------
 

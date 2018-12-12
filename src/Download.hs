@@ -7,15 +7,6 @@ import Control.Monad.Extra (unlessM)
 import Data.HashSet (HashSet)
 import Data.List (intercalate)
 import Data.Maybe (isJust)
-import Distribution.PackageDescription
-    ( GenericPackageDescription(..)
-    , dataDir
-    )
-import Distribution.Simple
-    ( UserHooks(..)
-    , defaultMainWithHooks
-    , simpleUserHooks
-    )
 import System.IO (hPutStrLn, stderr, stdout, hFlush)
 import System.FilePath ((</>), normalise)
 import System.Directory (doesFileExist)

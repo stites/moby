@@ -4,7 +4,7 @@ cabal-version: 1.24
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: c2937890e6070b811b848b5a91e2cc89145f8368b6740de3030f01d0e37464ae
+-- hash: f2ddf926678986000c23f35140a00289cc64cdc8300f196b9662c288026a27c1
 
 name:           moby
 version:        0.1.0.0
@@ -47,6 +47,7 @@ custom-setup
 library
   exposed-modules:
       Configure
+      Download
       Graph
       Lib
       Server
@@ -62,6 +63,7 @@ library
     , cryptonite
     , dhall
     , directory
+    , extra
     , fgl
     , filepath
     , hashtables
@@ -70,6 +72,7 @@ library
     , http-types
     , mtl
     , network-uri
+    , safe-exceptions
     , servant
     , servant-client
     , servant-server
@@ -91,6 +94,9 @@ executable moby
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:
       base >=4.7 && <5
+    , bytestring
+    , directory
+    , filepath
     , http-client
     , http-client-tls
     , http-types
@@ -105,18 +111,15 @@ executable moby
 executable mobyd
   main-is: Main.hs
   other-modules:
-      Download
       Paths_moby
   hs-source-dirs:
       server
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:
-      Cabal
-    , base >=4.7 && <5
+      base >=4.7 && <5
     , bytestring
     , cryptonite
     , directory
-    , extra
     , filepath
     , http-client
     , http-client-tls
@@ -125,7 +128,6 @@ executable mobyd
     , network
     , optparse-applicative
     , path
-    , safe-exceptions
     , unordered-containers
     , wai
     , warp

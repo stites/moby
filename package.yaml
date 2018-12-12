@@ -50,6 +50,8 @@ library:
     - aeson
     - unliftio
     - wai
+    - extra
+    - safe-exceptions
 
 executables:
   moby:
@@ -62,6 +64,7 @@ executables:
     dependencies:
     - moby
     - optparse-applicative
+    - bytestring
     - text
     - network
     - servant
@@ -69,6 +72,8 @@ executables:
     - http-client
     - http-client-tls
     - http-types
+    - directory
+    - filepath
 
   mobyd:
     main: Main.hs
@@ -82,14 +87,10 @@ executables:
     - optparse-applicative
     - bytestring
     - network
-    - Cabal
     - unordered-containers
-    - Cabal
     - http-client
     - http-client-tls
     - http-types
-    - safe-exceptions
-    - extra
     - base >= 4.7 && < 5
     - bytestring
     - cryptonite
