@@ -49,6 +49,7 @@ library:
     - transformers
     - aeson
     - unliftio
+    - wai
 
 executables:
   moby:
