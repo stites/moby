@@ -54,7 +54,7 @@ library:
 executables:
   moby:
     main: Main.hs
-    source-dirs: client
+    source-dirs: cli
     ghc-options:
     - -threaded
     - -rtsopts

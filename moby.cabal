@@ -4,7 +4,7 @@ cabal-version: 1.24
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 73c1cbecdb1381b42f0124db7770e043fedf09955066f9b45cb56e85904a6f1c
+-- hash: 82a21933049469667b8f072c8f638fe2de84c9ba0bd7aaea6a563b85e823da42
 
 name:           moby
 version:        0.1.0.0
@@ -86,7 +86,7 @@ executable moby
   other-modules:
       Paths_moby
   hs-source-dirs:
-      client
+      cli
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:
       base >=4.7 && <5
