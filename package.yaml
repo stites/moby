@@ -42,7 +42,13 @@ library:
     - text
     - unordered-containers
     - hashtables
-    - comonad
+    - servant
+    - servant-client
+    - servant-server
+    - mtl
+    - transformers
+    - aeson
+    - unliftio
 
 executables:
   moby:

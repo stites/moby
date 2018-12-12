@@ -4,7 +4,7 @@ cabal-version: 1.24
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 10dc3c5fa558b2ad7b97c46ff89ed7b5027a3b0972e1e9ac0adb7f8d4d043e00
+-- hash: e8b27b36ae2426f3eafd61fcd5ba2773913379aeb0827a166fa40ea7b00f03e5
 
 name:           moby
 version:        0.1.0.0
@@ -49,15 +49,16 @@ library
       Configure
       Graph
       Lib
+      Server
       Version
   other-modules:
       Paths_moby
   hs-source-dirs:
       src
   build-depends:
-      base >=4.7 && <5
+      aeson
+    , base >=4.7 && <5
     , bytestring
-    , comonad
     , cryptonite
     , dhall
     , directory
@@ -67,8 +68,14 @@ library
     , http-client
     , http-client-tls
     , http-types
+    , mtl
     , network-uri
+    , servant
+    , servant-client
+    , servant-server
     , text
+    , transformers
+    , unliftio
     , unordered-containers
     , zlib
   default-language: Haskell2010

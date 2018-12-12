@@ -3,7 +3,6 @@
 module Lib where
 
 import Control.Arrow
-import Control.Comonad.Store
 import Control.Monad
 import Control.Monad.ST
 import System.Directory (listDirectory)
@@ -38,4 +37,6 @@ mobyKVs = fmap (second (BL.drop 1) . C.span (/= ',')) . C.lines
 mkMobyTable :: ByteString -> ST s (HC.HashTable s ByteString ByteString)
 mkMobyTable = H.fromList . mobyKVs
 
+mkMobyMap :: ByteString -> HashMap ByteString ByteString
+mkMobyMap = HM.fromList . mobyKVs
 
