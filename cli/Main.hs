@@ -4,27 +4,28 @@ module Main where
 
 import Lib
 import Options.Applicative
-import Data.ByteString.Lazy (ByteString)
+import Data.Text (Text)
 import Text.Printf
-import qualified Data.ByteString.Lazy as BL
-import qualified Data.ByteString.Lazy.Char8 as C
+import qualified Data.Text as T
 
 import qualified Version as V
+
+import qualified Client
 
 main :: IO ()
 main = execParser opts >>= \mos ->
   case (version mos, word mos) of
     (True,  _) -> print V.version
     (   _, ws) ->
-      let w = C.unwords ws
-      in (`lookupWord` w) <$> loadMobyTxt "words.txt"
+      let w = T.unwords ws
+      in Client.lookup w
         >>= \case
-          Nothing -> printf "%s not found in moby!\n" (show w)
-          Just s  -> do
+          Left err -> printf "%s not found in moby!\n" (show w)
+          Right ss -> do
             let hdr = show w ++ " synonyms:"
             putStrLn   hdr
             putStrLn $ replicate (length hdr) '='
-            putStrLn . C.unpack $ C.intercalate (sep mos) (C.split ',' s)
+            putStrLn . T.unpack $ T.intercalate (sep mos) (T.split (== ',') ss)
  where
    opts = info (mobyOpts <**> helper)
       ( fullDesc
@@ -33,9 +34,9 @@ main = execParser opts >>= \mos ->
       )
 
 data MobyOpts = MobyOpts
-  { sep :: ByteString
+  { sep :: Text
   , version :: Bool
-  , word :: [ByteString]
+  , word :: [Text]
   }
 
 mobyOpts :: Parser MobyOpts

@@ -62,8 +62,13 @@ executables:
     dependencies:
     - moby
     - optparse-applicative
-    - bytestring
+    - text
     - network
+    - servant
+    - servant-client
+    - http-client
+    - http-client-tls
+    - http-types
 
   mobyd:
     main: Main.hs
